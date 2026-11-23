@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Radar: pre-token protocols ranked by implied value</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<noscript><p class="noscript">Token Radar needs JavaScript: the board is rendered from the snapshot's data in the page.</p></noscript>
+<header class="top">
+  <div class="brand">
+    <span class="mark" aria-hidden="true">◉</span>
+    <div>
+      <h1>Token Radar</h1>
+      <p class="sub">Pre-token protocols, ranked by what a token would be worth if the protocol's record stayed as it is.</p>
+    </div>
+  </div>
+  <dl class="stats" id="stats"></dl>
+</header>
+
+<section class="panel controls" aria-label="Filter and sort the board">
+  <label>Search <input id="q" type="search" placeholder="Name or slug…" autocomplete="off"></label>
+  <label>Category <select id="category"><option value="">All categories</option></select></label>
+  <label>Chain <select id="chain"><option value="">All chains</option></select></label>
+  <label class="check"><input id="watchlistOnly" type="checkbox"> Watchlist only</label>
+  <label>Sort <select id="sort">
+    <option value="rank">Rank (implied value)</option>
+    <option value="tvl">TVL, high to low</option>
+    <option value="growth">7-day growth, high to low</option>
+    <option value="age">Age, oldest first</option>
+    <option value="name">Name, A to Z</option>
+  </select></label>
+  <p class="count" id="count" aria-live="polite"></p>
+</section>
+
+<main>
+  <section class="panel" aria-label="Ranked board">
+    <h2>Ranked board <span class="hint">Click a row for its detail and farm plan.</span></h2>
+    <div class="table-wrap">
+      <table id="board">
+        <thead>
+          <tr>
+            <th data-sort="rank">#</th>
+            <th data-sort="name">Protocol</th>
+            <th data-sort="category">Category</th>
+            <th>Chains</th>
+            <th data-sort="tvl">TVL</th>
+            <th data-sort="growth">7d</th>
+            <th data-sort="age">Age</th>
+            <th data-sort="implied">Implied value</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <p class="note" id="boardNote"></p>
+  </section>
+
+  <section class="panel detail" id="detail" aria-label="Protocol detail" hidden>
+    <button class="close" id="closeDetail" type="button">Close ×</button>
+    <div id="detailBody"></div>
+  </section>
+
+  <section class="panel" aria-label="Live tokens">
+    <h2>Live tokens <span class="hint">These already trade, so the board shows the market's own value, never a model's.</span></h2>
+    <div class="table-wrap">
+      <table id="live">
+        <thead>
+          <tr><th>Protocol</th><th>Category</th><th>Chains</th><th>TVL</th><th>Market cap</th><th>7d</th></tr>
+        </thead>
+        <tbody id="liveRows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel model" aria-label="How the value is computed">
+    <h2>How the value is computed</h2>
+    <p id="modelText"></p>
+    <p class="note">A protocol records no token when its DefiLlama record carries no market cap, no CoinGecko id and no symbol. That is the record's word, never proof it has none. Wrapped, staked and bridged products of a token that already trades, centralised exchanges and versioned pools are not ranked: a wrapped product is not a token that does not exist yet.</p>
+    <p class="note">Implied value is this radar's own claim, never make.fun's, and it does not predict whether or when a token is issued.</p>
+  </section>
+</main>
+
+<footer>
+  <p id="sourceLine"></p>
+</footer>
+
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
